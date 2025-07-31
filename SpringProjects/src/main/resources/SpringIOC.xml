@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"  
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd
+	 http://www.springframework.org/schema/oxm  
+        http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd
+	   http://www.springframework.org/schema/tx
+       https://www.springframework.org/tx/spring-tx.xsd">
+ 
+   	<!-- XML FILE MANGAED BY SPRING IOC CONTAINER -->
+	<!-- Bean class dependency injection -->
+	<!-- no new keyword for creating object -->
+
+	<!-- default scope for this bean is singleton -->
+<!-- 
+	SampleBean mybean1 = new SampleBean();
+	mybean1.setUsername("Thananya");	 -->
+	
+	
+	<!--  <bean class="springprograms.SampleBean" id="mybean1" scope="singleton">-->
+ 				<!-- setter method DEPENDENCY injection(bean property) -->
+ 	
+ 					<!-- calling setUsername() -->
+	<!--  <property name="username" value="Thananya" />
+ 
+ 	</bean>
+ 	-->
+ 	<!--  
+ 	<bean class="springPractice.Student" id="mybean2" abstract="true">
+		<property name="sid" value="1000" />
+		<property name="sname" value="Thananya" />
+	</bean>
+	-->
+ 	
+ 	    	<!-- inheritance -->
+ 	<!-- 	
+	<bean class="springPractice.Student_Course" id="mybean3" parent="mybean2">
+		<property name="courseid" value="10" />
+		<property name="coursename" value="Java" />
+	</bean> 
+	-->
+	 
+	<bean class="springassignments.Bank" id="bankobj">
+		<constructor-arg name="bankId" value="101"/>
+		<constructor-arg name="bankName" value="Canara"/>
+	</bean>
+	<bean  class="springassignments.Account" id="accountobj">
+	<constructor-arg index="0" value="1377593757"/>
+	<constructor-arg index="1"  value="Vinitha"/>
+	<constructor-arg index="2" value="10876"/> 
+	<constructor-arg index="3" ref="bankobj"/>
+	</bean>
+	
+	<context:component-scan base-package="springassignments"/>
+	<context:property-placeholder location="classpath:PropertyPlaceholderConfigurer.properties"/> 
+	<bean  class="springassignments.Account4" id="ac4obj">
+	<property name="accountNumber" value="${account.number}"/>
+	<property name="accountHolderName" value="${account.holder}"/>
+	<property name="balance" value="${account.balance}"/>
+	<property name="type" value="${account.type}"/>
+	</bean>
+	
+	
+</beans>
+	
