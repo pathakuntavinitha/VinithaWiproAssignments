@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!-- hibernate built in properties -->
+
+<session-factory>
+  <property name="hibernate.connection.autocommit">true</property>
+
+<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+
+<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/student</property>
+
+<property name="hibernate.connection.username">root</property>
+
+<property name="hibernate.connection.password">Vinitha@123</property>
+
+<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+<!-- The possible values for hbm2ddl.auto:
+**create
+**validate
+**update(If the value is update then, Hibernate checks for the table and columns.
+ If a table doesn’t exist then it creates 
+new tables 
+and where as if a column doesn’t exist it creates new columns for it.)
+**create-drop -->
+
+<property name="hibernate.hbm2ddl.auto">update</property>
+
+
+
+<!-- show_sql. Enable the logging of all the generated SQL statements to the 
+console -->
+<!--  true tells hibernate to Write all SQL statements to console window.  -->
+<property name="hibernate.show_sql">true</property>
+
+
+
+<!-- mapping the POJO class/ENTITY CLASS to the MYSQL TABLE -->
+
+<!-- pojo class annotation files -->
+<mapping class="mypojos.Student_123"/>
+
+</session-factory>
+
+</hibernate-configuration>
