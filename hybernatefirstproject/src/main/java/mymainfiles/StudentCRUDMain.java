@@ -5,26 +5,6 @@ import java.util.Scanner;
 
 import mydaofiles.StudentDAO;
 import mypojos.Student_123;
-
-/*
- * mysql> select * from wipro_hibernate_students;
-+----+---------------+-----------+
-| id | email         | stud_name |
-+----+---------------+-----------+
-|  1 | dev@gmail.com | Devi      |
-+----+---------------+-----------+
-1 row in set (0.00 sec)
-
-mysql> desc wipro_hibernate_students;
-+-----------+--------------+------+-----+---------+----------------+
-| Field     | Type         | Null | Key | Default | Extra          |
-+-----------+--------------+------+-----+---------+----------------+
-| id        | int(11)      | NO   | PRI | NULL    | auto_increment |
-| email     | varchar(255) | YES  |     | NULL    |                |
-| stud_name | varchar(15)  | YES  |     | NULL    |                |
-+-----------+--------------+------+-----+---------+----------------+
-3 rows in set (0.00 sec)
- */
 public class StudentCRUDMain {
 
 	public static void main(String[] args) {

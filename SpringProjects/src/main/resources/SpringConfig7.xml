@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"  
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd
+	 http://www.springframework.org/schema/oxm  
+        http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd
+	   http://www.springframework.org/schema/tx
+       https://www.springframework.org/tx/spring-tx.xsd">
+
+    <bean id="prodobj" class="springassignment7.Product">
+        <constructor-arg value="1"/>
+        <constructor-arg value="Laptop"/>
+        <constructor-arg value="70000.0"/>
+    </bean>
+	
+    <bean id="purobj" class="springassignment7.Purchase" autowire="constructor">
+        <constructor-arg value="1"/>
+        <constructor-arg value="2025-08-01"/>
+        <constructor-arg ref="prodobj"/>
+    </bean>
+
+</beans>

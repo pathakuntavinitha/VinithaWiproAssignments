@@ -1,4 +1,4 @@
-package springassignments;
+package springassignmentsQ2andQ4;
 
 public class Account {
 	

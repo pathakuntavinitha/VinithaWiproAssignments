@@ -2,8 +2,8 @@ package springmainfiles;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import springassignments.Account;
-import springassignments.Account4;
+import springassignmentsQ2andQ4.Account;
+import springassignmentsQ2andQ4.Account4;
 
 //import springPractice.Product;
 //import springPractice.Student_Course;
