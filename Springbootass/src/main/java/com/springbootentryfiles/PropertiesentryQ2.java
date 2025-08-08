@@ -13,6 +13,7 @@ public class PropertiesentryQ2 {
 		p.getValueInteger();
 		p.getValueBoolean();
 		p.getValueDouble();
+	
 	}
 }
 /*Integer9876
