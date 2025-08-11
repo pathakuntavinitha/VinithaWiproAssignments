@@ -13,7 +13,7 @@ public class PersonDAOImpl implements PersonDAO {
     }
     public void save(Person p) {
         jdbcTemplate.update("INSERT INTO person(id, age, firstName, lastName) VALUES (?, ?, ?, ?)",
-                p.getId(), p.getAge(), p.getFirstName(), p.getLastName();
+                p.getId(), p.getAge(), p.getFirstName(), p.getLastName());
     }
     public void update(Person p) {
         jdbcTemplate.update("UPDATE person SET age=?, firstName=?, lastName=? WHERE id=?",
