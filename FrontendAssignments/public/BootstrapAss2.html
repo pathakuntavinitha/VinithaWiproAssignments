@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Professional Tuition Catalog</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    :root{
+      --math-color: #1e88e5;   
+      --sci-color:  #2e7d32;   
+      --eng-color:  #ff8a42; 
+    }
+
+    body{
+      background-color: #f5f7fa;
+      color: #243043;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .page-header{
+      padding: 2.2rem 0 0.6rem;
+      text-align: center;
+    }
+    .page-header .title-wrap{
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      background: transparent;
+      padding: .2rem .6rem;
+      border-radius: 8px;
+    }
+    .page-header h1{
+      margin:0;
+      font-weight:800;
+      font-size:1.45rem;
+    }
+
+    .thumb-strip{
+      display:flex;
+      gap:1rem;
+      justify-content:center;
+      align-items:center;
+      overflow-x:auto;
+      padding: .6rem 0 1.1rem;
+      margin-bottom: 1.25rem;
+    }
+    .thumb-strip img{
+      width:220px;
+      height:110px;
+      object-fit:cover;
+      border-radius:.6rem;
+      box-shadow: 0 6px 18px rgba(20,30,50,.05);
+      border:1px solid rgba(0,0,0,0.04);
+      flex:0 0 auto;
+    }
+    .card-course{
+      border: none;
+      border-radius: .9rem;
+      box-shadow: 0 10px 24px rgba(20,30,50,0.06);
+      overflow: hidden;
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+      background:#fff;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .card-course:hover{ transform: translateY(-6px); box-shadow: 0 16px 36px rgba(20,30,50,0.08); }
+
+    .card-img-wrap{ position:relative; overflow:hidden; }
+    .card-img-top{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      display:block;
+      transition: transform .45s ease;
+    }
+    .card-img-wrap:hover .card-img-top{ transform: scale(1.03); }
+    .badge-pos{
+      position:absolute;
+      top:12px;
+      left:12px;
+      padding:.45rem .6rem;
+      border-radius:.45rem;
+      font-weight:700;
+      font-size:.8rem;
+      color:#fff;
+      box-shadow: 0 6px 18px rgba(20,30,50,0.08);
+      line-height:1;
+    }
+
+    .card-body{
+      padding:1.1rem 1.2rem 0.9rem;
+      display:flex;
+      flex-direction:column;
+      gap:.5rem;
+      flex:1 1 auto;
+    }
+
+    .card-title{
+      font-weight:800;
+      font-size:1.05rem;
+      margin:0 0 .35rem 0;
+    }
+    .card-title .suffix { font-weight:700; opacity:.95; }
+
+    .card-desc{ color:#5f6b77; margin-bottom:.5rem; font-size:.95rem; }
+
+    .details-list{ list-style:none; padding:0; margin:0 0 1rem 0; color:#4b5563; }
+    .details-list li{
+      margin-bottom:.5rem;
+      font-size:.95rem;
+      display:flex;
+      align-items:center;
+    }
+    .details-list .icon{
+      width:28px;
+      height:28px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:#f1f5f9;
+      margin-right:.6rem;
+      font-size:.85rem;
+      color:#374151;
+      flex:0 0 28px;
+    }
+
+    .enroll-btn{
+      border:none;
+      font-weight:800;
+      padding:.52rem .9rem;
+      border-radius:.6rem;
+      box-shadow: 0 8px 20px rgba(20,30,50,0.06);
+      text-transform:none;
+    }
+    .enroll-wrap{ margin-top:auto; }
+
+    .card-footer{
+      background:transparent;
+      border-top: 1px dashed rgba(0,0,0,.05);
+      padding:.7rem 1.2rem;
+      color:#6b7280;
+      font-size:.88rem;
+    }
+    @media (min-width:1200px){ .card-img-top{ height:200px; } }
+    @media (max-width:576px){ .card-img-top{ height:160px; } .thumb-strip img{ width:140px; height:80px; } }
+
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <header class="page-header">
+      <div class="title-wrap">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="icon" style="width:40px;height:40px;">
+        <h1>Professional Tuition Catalog</h1>
+      </div>
+    </header>
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-4 d-flex">
+        <article class="card-course w-100" aria-label="Mathematics course">
+          <div class="card-img-wrap">
+            <img src="mathemetics.jpg" class="card-img-top" alt="Mathematics">
+            <span class="badge-pos" style="background:var(--math-color)">Best Seller</span>
+          </div>
+
+          <div class="card-body">
+            <h2 class="card-title" style="color:var(--math-color);">
+              Mathematics <span class="suffix">Tuition</span>
+            </h2>
+
+            <p class="card-desc">Expert coaching for Class 8–12. Includes weekly tests, exam preparation, and doubt clearing.</p>
+
+						<ul class="details-list">
+							<li><i class="bi bi-person-badge-fill"></i> <strong>Teacher:</strong>
+								Mr. Raj Kumar</li>
+							<li><i class="bi bi-clock-fill"></i> <strong>Duration:</strong>
+								3 Months</li>
+							<li><i class="bi bi-currency-rupee"></i> <strong>Fee:</strong>
+								₹5,000</li>
+						</ul>
+
+						<div class="enroll-wrap mt-auto d-grid">
+              <a href="#" class="btn enroll-btn" style="background:var(--math-color); color:#fff;">Enroll Now</a>
+            </div>
+          </div>
+
+          <footer class="card-footer" align="center">Limited seats available!</footer>
+        </article>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 d-flex">
+        <article class="card-course w-100" aria-label="Science course">
+          <div class="card-img-wrap">
+            <img src="science.jpg" class="card-img-top" alt="Science">
+          </div>
+
+          <div class="card-body">
+            <h2 class="card-title" style="color:var(--sci-color);">
+              Science <span class="suffix">Tuition</span>
+            </h2>
+
+            <p class="card-desc">Covers Physics, Chemistry and Biology. Perfect for board & competitive exams.</p>
+
+						<ul class="details-list">
+							<li><i class="bi bi-person-badge-fill"></i> <strong>Teacher:</strong>
+								Mr. Priya Sharma</li>
+							<li><i class="bi bi-clock-fill"></i> <strong>Duration:</strong>
+								4 Months</li>
+							<li><i class="bi bi-currency-rupee"></i> <strong>Fee:</strong>
+								₹6,500</li>
+						</ul>
+
+            <div class="enroll-wrap mt-auto d-grid">
+              <a href="#" class="btn enroll-btn" style="background:var(--sci-color); color:#fff;">Enroll Now</a>
+            </div>
+          </div>
+
+          <footer class="card-footer" align="center">Hurry! Classes filling fast</footer>
+        </article>
+      </div>
+
+      <!-- English Card -->
+      <div class="col-12 col-md-6 col-lg-4 d-flex">
+        <article class="card-course w-100" aria-label="English course">
+          <div class="card-img-wrap">
+            <img src="english.jpg" class="card-img-top" alt="English">
+          </div>
+
+          <div class="card-body">
+            <h2 class="card-title" style="color:var(--eng-color);">
+              English <span class="suffix">Tuition</span>
+            </h2>
+
+            <p class="card-desc">Grammar, vocabulary and speaking skills for school and professional needs.</p>
+
+						<ul class="details-list">
+							<li><i class="bi bi-person-badge-fill"></i> <strong>Teacher:</strong>
+								Mr. Anil Verma</li>
+							<li><i class="bi bi-clock-fill"></i> <strong>Duration:</strong>
+								2 Months</li>
+							<li><i class="bi bi-currency-rupee"></i> <strong>Fee:</strong>
+								₹4,000</li>
+						</ul>
+
+            <div class="enroll-wrap mt-auto d-grid">
+              <a href="#" class="btn enroll-btn" style="background:var(--eng-color); color:#fff;">Enroll Now</a>
+            </div>
+          </div>
+
+          <footer class="card-footer" align="center">Weekend batches available</footer>
+        </article>
+      </div>
+
+    </div> 
+  </div> 
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

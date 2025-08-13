@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Website Feedback Survey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root
+    {
+      --brand-blue: #0b6aa8;
+      --muted: #667;
+      --bg: #f4f6f7;
+      --card-border: #e0e2e3;
+      --aside-bg: #fbf2cf;
+      --aside-border: #f0e0a0;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Open Sans", Arial, sans-serif;
+      background: var(--bg);
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+    }
+
+ header {
+        background-color: #0b6aa8;
+        color: white;
+        padding: 10px 20px;
+    }
+    header h1 {
+        margin: 0;
+        font-size: 1.8em;
+    }
+    header p {
+        margin: 2px 0 0;
+        font-size: 0.9em;
+    }
+    nav {
+        background-color: #e6e6e6;
+        padding: 8px 20px;
+    }
+    nav a {
+        margin-right: 15px;
+        text-decoration: none;
+        color: #0b6aa8;
+        font-weight: bold;
+    }
+    main{
+      margin-top:20px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 2fr 1fr;
+      gap:20px;
+      align-items:start;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--card-border);
+      padding:18px;
+      border-radius:2px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+    }
+    .card h2{
+      margin:0 0 12px 0;
+      font-size:16px;
+      color: #333;
+      font-weight:700;
+    }
+    .section-title{
+      margin:14px 0 8px;
+      font-weight:600;
+      color:#555;
+    }
+    label{
+      display:block;
+      font-size:13px;
+      margin-bottom:6px;
+      color:#444;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select,
+    textarea{
+      width:100%;
+      padding:8px 10px;
+      border:1px solid #cfcfcf;
+      border-radius:2px;
+      font-size:14px;
+      outline:none;
+      margin-bottom:12px;
+    }
+    input:focus, textarea:focus, select:focus{
+      border-color: var(--brand-blue);
+      box-shadow: 0 0 0 2px rgba(11,106,168,0.07);
+    }
+
+    textarea{
+      min-height:110px;
+      resize:vertical;
+    }
+    .range-row{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    input[type="range"]{
+      -webkit-appearance: none;
+      width:100%;
+      height:8px;
+      background:#e6e6e6;
+      border-radius:6px;
+      outline:none;
+    }
+    input[type="range"]::-webkit-slider-thumb{
+      -webkit-appearance:none;
+      width:16px;
+      height:16px;
+      border-radius:50%;
+      background: var(--brand-blue);
+      border: 3px solid #2b9ad1;
+      margin-top:-4px;
+      cursor:pointer;
+    }
+    .range-value{
+      min-width:46px;
+      text-align:center;
+      font-weight:700;
+      color:var(--brand-blue);
+    }
+    .radio-group{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      margin-bottom:10px;
+    }
+    .radio-group label{font-weight:500; margin:0; display:flex; align-items:center; gap:6px; font-size:14px}
+
+    .checkbox-row{
+      margin-top:8px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      font-size:13px;
+    }
+    .actions{
+      margin-top:14px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    button.btn{
+      padding:10px 18px;
+      font-weight:700;
+      border-radius:2px;
+      cursor:pointer;
+      font-size:14px;
+      border:2px solid transparent;
+    }
+    button.btn.primary{
+      background:var(--brand-blue);
+      color:#fff;
+      border-color: #0a5f8b;
+    }
+    button.btn.reset{
+      background:#fff;
+      color:var(--brand-blue);
+      border-color:var(--brand-blue);
+    }
+    aside.info{
+      background: var(--aside-bg);
+      border:1px solid var(--aside-border);
+      padding:16px;
+      border-radius:2px;
+      min-height:220px;
+      color:#333;
+    }
+    aside h3{margin-top:0; margin-bottom:8px; font-size:15px;}
+    aside p{margin:0; font-size:14px; line-height:1.45; color:#333}
+    footer.site-foot{
+      margin-top:20px;
+      background:#efefef;
+      border-top:1px solid #e0e0e0;
+      padding:12px 0;
+      color:#666;
+      font-size:13px;
+    }
+    .muted{color:#777; font-size:13px}
+    @media (max-width:860px){
+      .grid{grid-template-columns: 1fr; }
+      nav.site-nav{margin-bottom:8px}
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap-head">
+        <h1>Website Feedback Survey</h1>
+        <p class="lead">We value your opinion. Please take a minute to share your thoughts.</p>
+ 	</div>
+</header>
+ 
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+</nav>
+	
+  <main class="wrap" role="main" aria-labelledby="main-heading">
+    <div class="grid" role="presentation">
+
+      <section class="card" aria-labelledby="form-title">
+        <h2 id="form-title">Personal Information</h2>
+
+        <form id="feedbackForm" action="#" method="post" novalidate>
+        
+          <div>
+            <label for="fullname">Full Name <span style="color:#b00">*</span></label>
+            <input id="fullname" name="fullname" type="text" placeholder="Enter your full name" required>
+
+            <label for="email">Email Address <span style="color:#b00">*</span></label>
+            <input id="email" name="email" type="email" placeholder="name@example.com" required>
+
+            <label for="age">Age</label>
+            <input id="age" name="age" type="number" min="10" max="100" placeholder="Age">
+          </div>
+
+          <h3 class="section-title">Website Rating</h3>
+
+          <label for="designRange" style="margin-bottom:6px;">Design (1–10):</label>
+          <div class="range-row" aria-hidden="false">
+            <input id="designRange" name="design" type="range" class="slider" min="1" max="10" value="5" step="1" aria-valuemin="1" aria-valuemax="10" />
+            <div class="range-value" id="designValue">5</div>
+          </div>
+
+          <div>
+            <label class="muted" style="margin-bottom:8px; display:block;">Content Quality:</label>
+            <div class="radio-group" role="radiogroup" aria-label="Content Quality">
+              <label><input type="radio" name="contentQuality" value="Excellent" checked> Excellent</label>
+              <label><input type="radio" name="contentQuality" value="Good"> Good</label>
+              <label><input type="radio" name="contentQuality" value="Average"> Average</label>
+              <label><input type="radio" name="contentQuality" value="Poor"> Poor</label>
+            </div>
+          </div>
+
+          <div>
+            <label for="mostVisited">Most visited page:</label>
+            <select id="mostVisited" name="mostVisited">
+              <option>Home</option>
+              <option>Blog</option>
+              <option>Products</option>
+              <option>Contact</option>
+            </select>
+          </div>
+
+          <h3 class="section-title">Suggestions</h3>
+          <label for="suggestions" class="muted">Write your suggestions here...</label>
+          <textarea id="suggestions" name="suggestions" placeholder="Write your suggestions here..."></textarea>
+
+          <div class="checkbox-row">
+            <input id="contactOk" type="checkbox" name="contactOk" />
+            <label for="contactOk">I agree to be contacted regarding my feedback</label>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn primary">Submit</button>
+            <button type="reset" class="btn reset">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <aside class="info" role="complementary" aria-labelledby="aside-title">
+        <h3 id="aside-title">Why your feedback matters</h3>
+        <p>Your feedback helps us improve our website experience for everyone. Thank you for taking the time to share your thoughts.</p>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer class="site-foot wrap" role="contentinfo">
+    &copy 2025 Website Survey
+  </footer>
+</body>
+</html>

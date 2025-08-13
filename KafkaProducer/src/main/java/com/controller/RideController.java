@@ -27,7 +27,7 @@ public class RideController {
         message.setOperation("CREATE");
         String json = objectMapper.writeValueAsString(message);
         kafkaTemplate.send(topic, json);
-        return ResponseEntity.accepted().body("CREATE SENT");
+        return ResponseEntity.accepted().body("uber creation sent to kafka");
     }
 
     @PutMapping("/{id}")
@@ -36,7 +36,7 @@ public class RideController {
         message.setId(id);
         String json = objectMapper.writeValueAsString(message);
         kafkaTemplate.send(topic, json);
-        return ResponseEntity.accepted().body("UPDATE SENT");
+        return ResponseEntity.accepted().body("uber update  SENT to kafka");
     }
 
     @DeleteMapping("/{id}")
@@ -46,7 +46,7 @@ public class RideController {
         m.setId(id);
         String json = objectMapper.writeValueAsString(m);
         kafkaTemplate.send(topic, json);
-        return ResponseEntity.accepted().body("DELETE SENT");
+        return ResponseEntity.accepted().body("uber DELETE SENT to kafka");
     }
 
     @GetMapping("/{id}")

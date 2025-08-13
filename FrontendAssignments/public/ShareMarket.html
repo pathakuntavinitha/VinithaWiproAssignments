@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Share Market — Dashboard</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #f5f6f8;
+      --card-border: #e7e9ee;
+      --green: #28a745;
+      --red: #dc3545;
+      --muted: #6c757d;
+      --nav-bg:#2f3a40;
+    }
+
+    body{ background: var(--bg); }
+    .page-wrap{ max-width: 1180px; margin: 0 auto; }
+
+    .navbar{
+      background: var(--nav-bg)!important;
+      padding: 14px 22px;
+      border-radius: 6px;
+      margin: 22px auto 16px auto;
+      max-width: 1180px;
+    }
+    .navbar .navbar-brand{ color:#fff; font-weight: 700; letter-spacing:.2px; }
+    .navbar .nav-link{ color:#cfd6db!important; margin-left: 18px; }
+    .navbar .nav-link.active,
+    .navbar .nav-link:hover{ color:#fff!important; }
+
+    .card{
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      background:#fff;
+    }
+    .card-header{
+      background:#fff;
+      border-bottom:1px solid var(--card-border);
+      font-weight: 600;
+      padding:14px 18px;
+    }
+    .card-body{ padding:18px; }
+
+    .stat-card .logo{
+      width:56px; height:56px; border-radius: 12px;
+      display:flex; align-items:center; justify-content:center;
+      background:#f1f3f6;
+      margin-right:14px;
+      flex:0 0 56px;
+    }
+    .stat-card .logo i{ font-size: 40px; line-height: 1; }
+    .stat-card .title{ font-size: 1.05rem; font-weight: 700; margin: 2px 0 4px; }
+    .stat-card .ticker{ color:#000; font-weight: 700; }
+    .stat-card .price{ color:#000; font-size: .98rem; }
+    .stat-card .delta{ font-weight: 700; margin-top: 12px; }
+
+    .trend-list .list-group-item{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 18px;
+      border-color: var(--card-border);
+      font-weight: 600;
+    }
+    .trend-list .symbol{ color:#111; font-weight: 600; }
+    .trend-list .chg{
+      font-weight: 700;
+    }
+    .text-green{ color:var(--green)!important; }
+    .text-red{ color:var(--red)!important; }
+
+   
+    .footer-note{
+      color:#6c757d; font-size:.95rem;
+      border-top:1px solid var(--card-border);
+      padding:16px 0 8px;
+      margin-top:16px;
+    }
+
+    .grid-gap{ row-gap: 18px; }
+  </style>
+</head>
+<body>
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid px-0">
+      <a class="navbar-brand" href="#">
+        Share Market
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Market Trends</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Top Gainers</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Top Losers</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-wrap px-2 px-sm-3">
+    <div class="row grid-gap">
+      
+      <div class="col-12 col-md-4">
+        <div class="card stat-card h-100">
+          <div class="card-header">Top Gainer</div>
+          <div class="card-body">
+            <div class="d-flex">
+              <div class="logo">
+             
+                <i class="bi bi-apple"></i>
+              </div>
+              <div>
+                <div class="title"><span class="ticker">AAPL</span></div>
+                <div class="price">$150.00</div>
+                <div class="delta text-green">+2.15%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="card stat-card h-100">
+          <div class="card-header">Top Loser</div>
+          <div class="card-body">
+            <div class="d-flex">
+              <div class="logo">
+               
+                <i class="bi bi-google"></i>
+              </div>
+              <div>
+                <div class="title"><span class="ticker">GOOG</span></div>
+                <div class="price">$2,800.00</div>
+                <div class="delta text-red">-1.05%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+ 
+      <div class="col-12 col-md-4">
+        <div class="card stat-card h-100">
+          <div class="card-header">Most Active</div>
+          <div class="card-body">
+            <div class="d-flex">
+              <div class="logo">
+             
+                <i class="bi bi-amazon"></i>
+              </div>
+              <div>
+                <div class="title"><span class="ticker">AMZN</span></div>
+                <div class="price">5,000,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="card h-100">
+          <div class="card-header">Trending Stocks</div>
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush trend-list">
+              <li class="list-group-item">
+                <span class="symbol">AAPL</span>
+                <span class="chg text-green">+2.15%</span>
+              </li>
+              <li class="list-group-item">
+                <span class="symbol">MSFT</span>
+                <span class="chg text-green">+1.25%</span>
+              </li>
+              <li class="list-group-item">
+                <span class="symbol">TSLA</span>
+                <span class="chg text-red">-0.75%</span>
+              </li>
+              <li class="list-group-item">
+                <span class="symbol">FB</span>
+                <span class="chg text-green">+0.80%</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+   
+      <div class="col-12 col-md-6">
+        <div class="card h-100">
+          <div class="card-header">Market Summary</div>
+          <div class="card-body">
+            <p class="mb-2">
+              The share market has been performing positively,
+              with major indices showing an upward trend.
+            </p>
+            <p class="mb-0">
+              Investors are optimistic about the economic recovey
+              and corporate earnings.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center footer-note">
+      Data for educational purposes only — Share Market 2025
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
