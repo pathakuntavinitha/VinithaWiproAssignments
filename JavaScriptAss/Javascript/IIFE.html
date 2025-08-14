@@ -1,0 +1,53 @@
+<!--  You are building a shopping site and need to manage product inventory using an IIFE.
+Implement an IIFE that:
+Stores a private product stock count.
+Provides three methods:
+getStock() – returns current stock.
+addStock(quantity) – adds the given quantity to stock.
+sell(quantity) – reduces the stock if enough is available, otherwise logs "Insufficient stock".
+Demonstrate usage of this IIFE by:
+Adding 10 items to stock.
+Selling 3 items.
+Logging current stock.
+
+Stock after adding: 10
+Sold 3 items.
+Stock remaining: 7
+-->
+<!-- Inventory Management with IIFE -->
+<html>
+<head>
+</head>
+<body>
+	<script>
+		const ProductInventory = (function() {
+			let stockcount = 0;
+			return {
+				addStock:function(quantity) {
+					stockcount += quantity;
+					document.write("Stock after adding: " + stockcount + "<br>");
+				},
+				sell:function(quantity) {
+					if (quantity <= stockcount) {
+						stockcount -= quantity;
+						document.write("Sold " + quantity + " items.<br>");
+					} else {
+						document.write("Insufficient stock<br>");
+					}
+				},
+				getStock:function() {
+					return stockcount;
+				}
+			};
+		})();
+		ProductInventory.addStock(10);
+		ProductInventory.sell(3);
+		document.write("Stock remaining: " + ProductInventory.getStock());
+	</script>
+</body>
+</html>
+<!-- 
+Stock after adding: 10
+Sold 3 items.
+Stock remaining: 7
+ -->
