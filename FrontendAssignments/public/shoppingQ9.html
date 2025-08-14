@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShopEase Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1>ShopEase Online</h1>
+        <p class="tagline">Your One-Stop Shop for Everything</p>
+      </div>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">Offers</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner container">
+        <h2>MEGA SALE — UP TO 50% OFF!</h2>
+        <a class="btn shop-now" href="#products">Shop Now</a>
+      </div>
+    </section>
+
+    <section class="section container" id="products">
+      <h2 class="section-title">Products</h2>
+
+      <div class="grid products-grid">
+    
+        <article class="card product">
+          <img src="watch.jpg" alt="Smartwatch with black strap" />
+          <h3>Smartwatch</h3>
+          <p class="desc">Smartphone, display full screen.</p>
+          <p class="price"><span class="sr-only">Price:</span>$29.99</p>
+          <button class="btn btn-outline" type="button">Add to Cart</button>
+        </article>
+        <article class="card product">
+          <img src="headset.jpg" alt="Wireless headset in white" />
+          <h3>Wireless Headset</h3>
+          <p class="desc">Audio playback, super simple.</p>
+          <p class="price">$14.99</p>
+          <button class="btn btn-outline" type="button">Add to Cart</button>
+        </article>
+
+        <article class="card product">
+          <img src="tshirt.jpg" alt="Casual T-shirt" />
+          <h3>Casual T-shirt</h3>
+          <p class="desc">A casual fit. All-season.</p>
+          <p class="price">$35.9</p>
+          <button class="btn btn-outline" type="button">Add to Cart</button>
+        </article>
+
+        <article class="card product">
+          <img src="sneakers.jpg" alt="Beige sneakers on white" />
+          <h3>Sneakers</h3>
+          <p class="desc">Clean, comfy & durable.</p>
+          <p class="price">$79.9</p>
+          <button class="btn btn-outline" type="button">Add to Cart</button>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="section container" id="offers">
+      <div class="promo-grid">
+     
+        <div class="promo-card promo-peach">
+          <span class="pill">Limited Time Offer</span>
+          <div class="promo-items">
+            <img src="spects.jpg" />
+            <img src="smartphone.jpg" alt="Blue smartphone front view" />
+          </div>
+        </div>
+        <div class="promo-card promo-gray">
+          <img class="promo-main" src="laptop.jpg" alt="Slim black laptop" />
+          <div class="price-badges">
+            <span>$799</span>
+            <span>$799</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <h2 class="section-title">Special Offer</h2>
+      <div class="special-grid">
+        <div class="card soft-card center">
+          <img src="specialoffermobile.jpg" alt="Black smartphone flat lay" />
+        </div>
+        <div class="card soft-card center focus-card">
+          <p class="special-price">$299</p>
+          <a href="#products" class="btn btn-success">Shop Now</a>
+        </div>
+        <div class="card soft-card center">
+          <img src="bag.jpg" alt="Stylish gray backpack" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <h2 class="section-title">Customer Reviews</h2>
+      <div class="reviews-grid">
+        <figure class="review card">
+          <blockquote>
+            “Great products and excellent customer support!”
+          </blockquote>
+          <figcaption><strong>John D.</strong></figcaption>
+        </figure>
+
+        <figure class="review card">
+          <blockquote>
+            “I love the quality and fast shipping!”
+          </blockquote>
+          <figcaption><strong>Serah P.</strong></figcaption>
+        </figure>
+
+        <figure class="review card">
+          <blockquote>
+            “Highly recommend this shop to everyone!”
+          </blockquote>
+          <figcaption><strong>Emily R.</strong></figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

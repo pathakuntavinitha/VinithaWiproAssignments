@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1" />
+  <title>Tirupati Temple Darshan Booking Form</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --card-width: 560px;
+      --radius-lg: 16px;
+    }
+    body {
+      background: #f5f5f7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      line-height: 1.35;
+    }
+    .booking-card {
+      max-width: var(--card-width);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+    .form-label {
+      font-weight: 500;
+      color: #2b2b2b;
+    }
+    .form-control, .form-select {
+      border-radius: .6rem;
+    }
+    .temple-logo {
+      width: 56px; height: 56px;
+      display: block; margin: 0 auto 6px;
+    }
+    .title-text {
+      font-weight: 700;
+      font-size: clamp(1.35rem, 2.2vw, 1.6rem);
+      text-align: center;
+    }
+    .subtitle-line { display:block; }
+  
+    .ccode-select {
+      width: 98px;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+    .tickets-input { max-width: 210px; }
+    .btn-submit {
+      height: 46px;
+      font-weight: 600;
+      letter-spacing: .2px;
+      border-radius: .6rem;
+    }
+   .mb-12 { margin-bottom: 12px !important; }
+    .mb-14 { margin-bottom: 14px !important; }
+  </style>
+</head>
+<body>
+  <main class="container py-4 py-md-5">
+    <div class="mx-auto bg-white p-4 p-md-5 booking-card">
+  	<div class="text-center">
+  <img src="tirumala.jpg" width="100" height="100" alt="Tirumala Temple">
+</div>
+      <h1 class="title-text mb-3">
+        Tirupati Temple Darshan Booking
+        <span class="subtitle-line">Form</span>
+      </h1>
+
+      <form id="darshanForm" novalidate>
+       
+        <div class="mb-3">
+          <label for="fullName" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="fullName" required>
+          <div class="invalid-feedback">Please enter your full name.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="email" required>
+          <div class="invalid-feedback">Please enter a valid email.</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="mobileNumber">Mobile Number</label>
+          <div class="input-group">
+            <select class="form-select ccode-select" id="countryCode" aria-label="Country code">
+              <option selected>+91</option>
+              <option>+1</option>
+              <option>+44</option>
+              <option>+61</option>
+              <option>+971</option>
+            </select>
+            <input
+              id="mobileNumber"
+              type="tel"
+              class="form-control"
+              placeholder="1234567890"
+              pattern="^[0-9]{10}$"
+              required>
+          </div>
+          <div class="invalid-feedback d-block" style="display:none"></div>
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label d-block">Gender</label>
+          <div class="d-flex gap-4">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="gMale" checked>
+              <label class="form-check-label" for="gMale">Male</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="gFemale">
+              <label class="form-check-label" for="gFemale">Female</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="gOther">
+              <label class="form-check-label" for="gOther">Other</label>
+            </div>
+          </div>
+        </div>
+
+      
+        <div class="row g-3 align-items-end mt-1 mb-1">
+          <div class="col-md-6">
+            <label for="darshanDate" class="form-label">Darshan Date</label>
+            <input type="date" class="form-control" id="darshanDate">
+          </div>
+          <div class="col-md-6">
+            <label for="timeSlot" class="form-label">Darshan Time Slot</label>
+            <select id="timeSlot" class="form-select">
+              <option selected>Morning</option>
+              <option>Afternoon</option>
+              <option>Evening</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="tickets" class="form-label">Number of Tickets</label>
+          <input id="tickets" type="number" class="form-control tickets-input" min="1" max="10" value="1" required>
+          <div class="invalid-feedback">Min 1, max 10.</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label d-block">Seva Type</label>
+          <div class="row g-2">
+            <div class="col-12 col-sm-6">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="sArchana" checked>
+                <label class="form-check-label" for="sArchana">Archana</label>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="sAbhi" checked>
+                <label class="form-check-label" for="sAbhi">Abhishekam</label>
+              </div>
+            </div>
+            <div class="col-12 col-sm-8">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="sSpecial" checked>
+                <label class="form-check-label" for="sSpecial">Special Entry Darshan</label>
+              </div>
+            </div>
+            <div class="col-12 col-sm-8">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="sSupra">
+                <label class="form-check-label" for="sSupra">Suprabhata Seva</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+     
+        <div class="mb-3">
+          <label class="form-label" for="idProof">
+            ID Proof Upload
+            <i class="bi bi-info-circle ms-1" data-bs-toggle="tooltip"
+               title="Upload clear image/PDF of Aadhaar, Passport, or any Govt. ID."></i>
+          </label>
+          <input class="form-control" type="file" id="idProof" accept="image/*,application/pdf">
+        </div>
+
+        <div class="mb-4">
+          <label for="addr" class="form-label">Address</label>
+          <input type="text" class="form-control" id="addr" placeholder="1234 Main St, Anytown, USA">
+   
+        <button type="submit" class="btn btn-primary w-100 btn-submit">Submit</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+ 
+    [...document.querySelectorAll('[data-bs-toggle="tooltip"]')]
+      .forEach(el => new bootstrap.Tooltip(el));
+
+    const form = document.getElementById('darshanForm');
+    form.addEventListener('submit', function (e) {
+    
+      if (!form.checkValidity()) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  </script>
+</body>
+</html>

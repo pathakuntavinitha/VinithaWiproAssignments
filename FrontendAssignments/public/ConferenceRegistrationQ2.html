@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Online Conferences Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            border: 1px solid black;
+            padding: 15px;
+            width: 600px;
+            margin: auto;
+        }
+
+        fieldset {
+            border: none;
+            margin-bottom: 15px;
+        }
+
+        legend {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-spacing: 10px;
+        }
+
+        td {
+            vertical-align: top;
+        }
+
+        label {
+            display: inline-block;
+            min-width: 150px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select,
+        textarea {
+            width: 250px;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        textarea {
+            height: 50px;
+        }
+
+        .form-actions {
+            text-align: center;
+        }
+
+        .form-actions input {
+            padding: 5px 15px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>ONLINE CONFERENCES REGISTRATION FORM</h1>
+    <form>
+        <fieldset>
+            <legend>Personal Information</legend>
+            <table>
+                <tr>
+                    <td><label for="fullname">Full Name</label></td>
+                    <td><input type="text" id="fullname" name="fullname"></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email Address</label></td>
+                    <td>
+                        <input type="email" id="email" name="email"><br>
+                        <small>format: user@example.com</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <input type="radio" name="gender" value="male">Male
+                        <input type="radio" name="gender" value="female">Female
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="country">Country</label></td>
+                    <td>
+                        <select id="country" name="country">
+                            <option>--Select--</option>
+                            <option>USA</option>
+                            <option>UK</option>
+                            <option>India</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Profile Photo Upload</td>
+                    <td><input type="file" name="photo"></td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <fieldset>
+            <legend>Account Preferences</legend>
+            <table>
+                <tr>
+                    <td><label for="username">Username</label></td>
+                    <td><input type="text" id="username" name="username"></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password</label></td>
+                    <td><input type="password" id="password" name="password"></td>
+                </tr>
+                <tr>
+                    <td><label for="confirm">Confirm Password</label></td>
+                    <td><input type="password" id="confirm" name="confirm"></td>
+                </tr>
+                <tr>
+                    <td>Interests</td>
+                    <td>
+                        <input type="checkbox" name="interest" value="web">Web Development
+                        <input type="checkbox" name="interest" value="ai">AI Cloud
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>Preferred Contact Method</td>
+                    <td>
+                        <input type="radio" name="contact" value="email">Email
+                        <input type="radio" name="contact" value="phone">Phone
+                    </td>
+                </tr>
+                <tr>
+                    <td>Special Requirements / Comments</td>
+                    <td><textarea name="comments"></textarea></td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <fieldset>
+            <legend>Payment Details</legend>
+            <table>
+                <tr>
+                    <td><label for="payment">Payment Method</label></td>
+                    <td>
+                        <select id="payment" name="payment">
+                            <option>--Select--</option>
+                            <option>Credit Card</option>
+                            <option>Debit Card</option>
+                            <option>PayPal</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="card">Card Number</label></td>
+                    <td><input type="text" id="card" name="card"></td>
+                </tr>
+                <tr>
+                    <td>Expiry Date</td>
+                    <td>
+                        <select name="month" style="display:inline-block; width:auto; margin-right:5px;">
+                            <option>Month</option>
+                            <option>01</option>
+                            <option>02</option>
+                        </select>
+                        <select name="year" style="display:inline-block; width:auto;">
+                            <option>Year</option>
+                            <option>2025</option>
+                            <option>2026</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="cvv">CVV</label></td>
+                    <td><input type="text" id="cvv" name="cvv"></td>
+                </tr>
+                <tr>
+                    <td>Terms & Conditions</td>
+                    <td>
+                        <input type="checkbox" name="terms">I agree to Terms
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <div class="form-actions">
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </div>
+    </form>
+</body>
+
+</html>
