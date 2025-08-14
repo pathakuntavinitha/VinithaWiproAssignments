@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Tour Booking Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center; 
+      align-items: center;     
+      }
+    .container {
+      background: white;
+      padding: 20px;
+      width: 350px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background: #28a745;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #218838;
+    }
+    #output {
+      margin-top: 20px;
+      background: #f0f0f0;
+      padding: 15px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Tour Booking Form</h2>
+
+    <label for="name">Full Name</label>
+    <input type="text" id="name">
+
+    <label for="email">Email</label>
+    <input type="email" id="email">
+
+    <label for="destination">Destination</label>
+    <select id="destination">
+      <option value="Ooty">Ooty</option>
+      <option value="Goa">Goa</option>
+      <option value="Manali">Manali</option>
+    </select>
+
+    <label for="days">Number of Days</label>
+    <input type="number" id="days" min="1">
+
+    <label for="travelers">Number of Travelers</label>
+    <input type="number" id="travelers" min="1">
+
+    <button onclick="bookTour()">Book Now</button>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    function bookTour() {
+      let name = document.getElementById("name").value;
+      let email = document.getElementById("email").value;
+      let destination = document.getElementById("destination").value;
+      let days = parseInt(document.getElementById("days").value);
+      let travelers = parseInt(document.getElementById("travelers").value);
+
+      let prices = {
+        "Ooty": 2000,
+        "Goa": 3000,
+        "Manali": 4000
+      };
+
+      let totalPrice = prices[destination] * days * travelers;
+
+      document.getElementById("output").innerHTML = `
+        <strong>Booking Details:</strong><br>
+        Name: ${name} <br>
+        Email: ${email} <br>
+        Destination: ${destination} <br>
+        Days: ${days} <br>
+        Travelers: ${travelers} <br>
+        Total Price: ₹${totalPrice}
+      `;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Book Store Management</title>
+  <style>
+    body { font-family: "Courier New", monospace; padding: 20px; background:#fafafa; }
+    pre { background:#fff; padding:12px; border:1px solid #ccc; border-radius:6px; }
+    button { padding:8px 12px; margin:5px; }
+  </style>
+</head>
+<body>
+  <h2>📚 Book Store Management</h2>
+  <button onclick="displayAll()">Display All Books</button>
+  <button onclick="displayAvailable()">Display Available Books</button>
+  <button onclick="addBook()">Add Book</button>
+  <button onclick="updatePrice()">Update Price</button>
+  <button onclick="deleteBook()">Delete Book</button>
+  <pre id="output"></pre>
+
+  <script>
+    const rupee = '₹';
+    let books = JSON.parse(localStorage.getItem("books")) || [];
+    function saveBooks() {
+      localStorage.setItem("books", JSON.stringify(books));
+    }
+    function displayAll() {
+      if (books.length === 0) {
+        showOutput("No books available.");
+        return;
+      }
+      let out = "All Books:\n";
+      for (const book of books) {
+        out += ` Title: ${book.title}, Author: ${book.author}, Price:${rupee} ${book.price}, Available: ${book.available} \n`;
+      }
+      showOutput(out);
+    }
+    function displayAvailable() {
+      let availableBooks = books.filter(b => b.available);
+      if (availableBooks.length === 0) {
+        showOutput("No available books.");
+        return;
+      }
+      let out = "Available Books:\n";
+      for (const book of availableBooks) {
+        out += ` Title: ${book.title}, Author: ${book.author}, Price:${rupee} ${book.price} \n`;
+      }
+      showOutput(out);
+    }
+    function addBook() {
+      let title = prompt("Enter book title:");
+      if (!title) return;
+      let author = prompt("Enter author name:");
+      let price = parseFloat(prompt("Enter price:"));
+      let available = prompt("Is it available? (yes/no):").toLowerCase() === "yes";
+      books.push({ title, author, price, available });
+      saveBooks();
+      showOutput("Book added successfully!\n" + books.map(b => b.title).join(", "));
+    }
+    function updateBook() {
+    	  let searchTitle = prompt("Enter book title to update:");
+    	  let book = books.find(b => b.title.toLowerCase() === searchTitle.toLowerCase());
+
+    	  if (!book) {
+    	    showOutput("Book not found.");
+    	    return;
+    	  }
+    	  let newTitle = prompt(`Enter new title (leave blank to keep "${book.title}"):`);
+    	  if (newTitle) book.title = newTitle;
+
+    	  let newAuthor = prompt(`Enter new author (leave blank to keep "${book.author}"):`);
+    	  if (newAuthor) book.author = newAuthor;
+
+    	  let newPrice = prompt(`Enter new price (leave blank to keep ${book.price}):`);
+    	  if (newPrice) {
+    	    let parsedPrice = parseFloat(newPrice);
+    	    if (!isNaN(parsedPrice)) book.price = parsedPrice;
+    	  }
+
+    	  let newAvailable = prompt(`Is it available? (yes/no, leave blank to keep "${book.available}"):`).toLowerCase();
+    	  if (newAvailable === "yes") book.available = true;
+    	  else if (newAvailable === "no") book.available = false;
+
+    	  saveBooks();
+    	  showOutput(`Book updated successfully:\n Title: ${book.title}, Author: ${book.author}, Price:${rupee} ${book.price}, Available: ${book.available}`);
+    	}
+
+    function deleteBook() {
+      let title = prompt("Enter book title to delete:");
+      let index = books.findIndex(b => b.title.toLowerCase() === title.toLowerCase());
+      if (index === -1) {
+        showOutput("Book not found.");
+        return;
+      }
+      books.splice(index, 1);
+      saveBooks();
+      showOutput("After Deletion:\n" + books.map(b => b.title).join(", "));
+    }
+    function showOutput(text) {
+      document.getElementById("output").textContent = text;
+      console.log(text);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Income Tax Calculator</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #eef1f7;
+    }
+
+    header {
+      background: #004aad;
+      color: white;
+      padding: 16px;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .calculator {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      padding: 20px 25px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #004aad;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #003580;
+    }
+
+    .error {
+      color: #d40000;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .result {
+      margin-top: 15px;
+      background: #f8faff;
+      border-left: 4px solid #004aad;
+      padding: 12px;
+      border-radius: 4px;
+      white-space: pre-wrap;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <header>Income Tax Calculator</header>
+
+  <main>
+    <div class="calculator">
+      <form id="taxForm">
+        <div id="msg" class="error" aria-live="polite"></div>
+
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Enter full name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="pan">PAN Number (10 characters)</label>
+          <input type="text" id="pan" placeholder="ABCDE1234F" maxlength="10" required />
+        </div>
+
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" required />
+        </div>
+
+        <div class="form-group">
+          <label for="income">Annual Income (₹)</label>
+          <input type="number" id="income" placeholder="e.g. 750000" min="0" required />
+        </div>
+
+        <button type="submit">Calculate Tax</button>
+      </form>
+
+      <div id="result" class="result">No calculation yet.</div>
+    </div>
+  </main>
+
+  <script>
+    function calculateTax(amount) {
+      let tax = 0;
+      if (amount > 250000) {
+        const slab2 = Math.min(amount, 500000) - 250000;
+        tax += Math.max(0, slab2) * 0.05;
+      }
+      if (amount > 500000) {
+        const slab3 = Math.min(amount, 1000000) - 500000;
+        tax += Math.max(0, slab3) * 0.20;
+      }
+      if (amount > 1000000) {
+        const slab4 = amount - 1000000;
+        tax += Math.max(0, slab4) * 0.30;
+      }
+      return Math.round(tax);
+    }
+
+    function computeAge(dobStr) {
+      const dob = new Date(dobStr);
+      if (isNaN(dob)) return null;
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+      return age;
+    }
+
+    function validatePAN(rawPan) {
+      const pan = (rawPan || '').trim().toUpperCase();
+      const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+      return { ok: panRegex.test(pan), pan };
+    }
+
+    document.getElementById('taxForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('msg').textContent = '';
+
+      const name = (document.getElementById('name').value || '').trim();
+      const panInput = document.getElementById('pan').value;
+      const dob = document.getElementById('dob').value;
+      const incomeVal = Number(document.getElementById('income').value);
+
+      if (!name) {
+        document.getElementById('msg').textContent = 'Please enter your name.';
+        return;
+      }
+
+      const panCheck = validatePAN(panInput);
+      if (!panCheck.ok) {
+        document.getElementById('msg').textContent = 'Invalid PAN. Format: ABCDE1234F.';
+        return;
+      }
+
+      const age = computeAge(dob);
+      if (age === null || age < 0) {
+        document.getElementById('msg').textContent = 'Please enter a valid Date of Birth.';
+        return;
+      }
+
+      if (!Number.isFinite(incomeVal) || incomeVal < 0) {
+        document.getElementById('msg').textContent = 'Please enter a valid annual income.';
+        return;
+      }
+
+      const tax = calculateTax(incomeVal);
+
+      const output = [
+        `Name : ${name.toUpperCase()}`,
+        `PAN : ${panCheck.pan}`,
+        `Age : ${age} years`,
+        `Annual Income : ₹${Math.round(incomeVal)}`,
+        `Calculated Tax : ₹${tax}`
+      ].join('\n');
+
+      document.getElementById('result').textContent = output;
+    });
+  </script>
+</body>
+</html>

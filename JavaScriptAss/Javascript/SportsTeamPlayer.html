@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sports Team Player Details</title>
+</head>
+<body>
+<script>
+const player1 = {
+    name: "Virat Kohli",
+    age: 36,
+    sport: "Cricket",
+    stats: {
+        matches: 500,
+        runs: 25000,
+        average: 57.2
+    }
+};
+
+const player2 = {
+    name: "Lionel Messi",
+    age: 38,
+    sport: "Football",
+    stats: {
+        matches: 800,
+        goals: 720,
+        assists: 300
+    }
+};
+
+const players = [player1, player2];
+
+const [firstPlayer, secondPlayer] = players;
+
+function displayPlayerDetails(player) {
+    const { name, sport, stats } = player;
+    const statKeys = Object.keys(stats);
+    const statValues = Object.values(stats);
+
+    document.write(`Player ${name} plays ${sport}.<br>`);
+    document.write(`${statKeys[0].charAt(0).toUpperCase() + statKeys[0].slice(1)}: ${statValues[0]} | 
+                    ${statKeys[1].charAt(0).toUpperCase() + statKeys[1].slice(1)}: ${statValues[1]} | 
+                    ${statKeys[2].charAt(0).toUpperCase() + statKeys[2].slice(1)}: ${statValues[2]}<br><br>`);
+}
+
+displayPlayerDetails(firstPlayer);
+displayPlayerDetails(secondPlayer);
+</script>
+</body>
+</html>
+
+<!-- 
+Player Virat Kohli plays Cricket.
+Matches: 500 | Runs: 25000 | Average: 57.2
+
+Player Lionel Messi plays Football.
+Matches: 800 | Goals: 720 | Assists: 300
+ -->

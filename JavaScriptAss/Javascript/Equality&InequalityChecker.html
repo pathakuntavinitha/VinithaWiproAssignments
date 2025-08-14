@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Equality & Inequality Checker</title>
+</head>
+<body>
+<script>
+    let firstValue = prompt("Enter first value:"); 
+    let secondValue =prompt("Enter second value:"); 
+    let secnum = Number(secondValue);
+    document.write("First Value: " + firstValue + " (" + typeof firstValue + ")<br>");
+    document.write("Second Value: " + secondValue + " (" + typeof secnum + ")<br><br>");
+    document.write("Using == : " + (firstValue == secnum) + " → Equality ignores type<br>");
+    document.write("Using === : " + (firstValue === secnum) + " → Strict equality checks type too<br>");
+    document.write("Using != : " + (firstValue != secnum) + " → Values considered equal<br>");
+    document.write("Using !== : " + (firstValue !== secnum) + " → Strict inequality because types differ<br>");
+</script>
+</body>
+</html>
+<!--  
+First Value: 80 (string)
+Second Value: 80 (number)
+
+Using == : true → Equality ignores type
+Using === : false → Strict equality checks type too
+Using != : false → Values considered equal
+Using !== : true → Strict inequality because types differ
+-->

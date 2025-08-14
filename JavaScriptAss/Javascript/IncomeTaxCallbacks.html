@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RTO Registration Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .form-container {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 700px;
+      margin: 30px auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .form-title {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <div class="form-title">RTO Vehicle Registration Form</div>
+  
+  <form>
+    <div class="mb-3">
+      <label for="ownerName" class="form-label">Owner Name</label>
+      <input type="text" class="form-control" id="ownerName" placeholder="Enter full name">
+    </div>
+    
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <textarea class="form-control" id="address" rows="2" placeholder="Enter address"></textarea>
+    </div>
+    
+    <div class="mb-3">
+      <label for="vehicleType" class="form-label">Vehicle Type</label>
+      <select class="form-select" id="vehicleType">
+        <option selected disabled>Choose...</option>
+        <option>Two Wheeler</option>
+        <option>Four Wheeler</option>
+        <option>Heavy Vehicle</option>
+      </select>
+    </div>
+    
+    <div class="mb-3">
+      <label for="engineNo" class="form-label">Engine Number</label>
+      <input type="text" class="form-control" id="engineNo" placeholder="Enter engine number">
+    </div>
+    
+    <div class="mb-3">
+      <label for="chassisNo" class="form-label">Chassis Number</label>
+      <input type="text" class="form-control" id="chassisNo" placeholder="Enter chassis number">
+    </div>
+    
+    <div class="mb-3">
+      <label for="regDate" class="form-label">Registration Date</label>
+      <input type="date" class="form-control" id="regDate">
+    </div>
+    
+    <div class="mb-3">
+      <label for="uploadDoc" class="form-label">Upload Document</label>
+      <input type="file" class="form-control" id="uploadDoc">
+    </div>
+    
+    <button type="submit" class="btn btn-primary w-100">Submit</button>
+  </form>
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Utilities and validation logic
+      const RTO = (function(){
+        const form = document.getElementById('rtoForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const topProgress = document.getElementById('topProgress');
+        const toastEl = document.getElementById('submitToast');
+        const toast = new bootstrap.Toast(toastEl);
+
+        // captcha
+        let captchaA=0, captchaB=0;
+        function genCaptcha(){
+          captchaA = Math.floor(Math.random()*9)+1;
+          captchaB = Math.floor(Math.random()*9)+1;
+          document.getElementById('captchaQuestion').textContent = `${captchaA} + ${captchaB} = ?`;
+        }
+
+        // helper validations
+        function setValidity(el, ok, message){
+          if(ok){
+            el.classList.remove('is-invalid'); el.classList.add('is-valid');
+          } else {
+            el.classList.remove('is-valid'); el.classList.add('is-invalid');
+            if(message){
+              const fb = el.parentElement.querySelector('.invalid-feedback');
+              if(fb) fb.textContent = message;
+            }
+          }
+        }
+
+        function validateOwner(){
+          let valid=true;
+          const fullName = document.getElementById('fullName');
+          const email = document.getElementById('email');
+          const mobile = document.getElementById('mobile');
+          const dob = document.getElementById('dob');
+          const aadhaar = document.getElementById('aadhaar');
+          const pan = document.getElementById('pan');
+
+          // name
+          setValidity(fullName, fullName.value.trim().length>2);
+          if(fullName.classList.contains('is-invalid')) valid=false;
+
+          // email
+          setValidity(email, email.checkValidity());
+          if(email.classList.contains('is-invalid')) valid=false;
+
+          // mobile: accept 10 digits, optional +91 or 0
+          const m = mobile.value.trim();
+          const mobRe = /^(?:\+91|0)?[6-9]\d{9}$/;
+          const mobOk = mobRe.test(m);
+          setValidity(mobile, mobOk, 'Enter a valid 10-digit Indian mobile (optionally +91 or 0).');
+          if(!mobOk) valid=false;
+
+          // dob >=18
+          let dobOk=false;
+          if(dob.value){
+            const d = new Date(dob.value);
+            const today = new Date();
+            let age = today.getFullYear() - d.getFullYear();
+            const mth = today.getMonth() - d.getMonth();
+            if(mth<0 || (mth===0 && today.getDate()<d.getDate())) age--;
+            dobOk = age>=18;
+          }
+          setValidity(dob, dobOk, 'Applicant must be at least 18 years old.');
+          if(!dobOk) valid=false;
+
+          // aadhaar
+          const aad = aadhaar.value.replace(/\s+/g,'');
+          const aadOk = /^\d{12}$/.test(aad);
+          setValidity(aadhaar, aadOk);
+          if(!aadOk) valid=false;
+
+          // pan
+          const p = pan.value.trim().toUpperCase(); pan.value = p;
+          const panOk = /^[A-Z]{5}[0-9]{4}[A-Z]$/.test(p);
+          setValidity(pan, panOk);
+          if(!panOk) valid=false;
+
+          return valid;
+        }
+
+        function validateAddress(){
+          let valid=true;
+          const addr1 = document.getElementById('addr1');
+          const city = document.getElementById('city');
+          const state = document.getElementById('state');
+          const pin = document.getElementById('pin');
+
+          setValidity(addr1, addr1.value.trim().length>3);
+          if(addr1.classList.contains('is-invalid')) valid=false;
+
+          setValidity(city, city.value.trim().length>1);
+          if(city.classList.contains('is-invalid')) valid=false;
+
+          setValidity(state, state.value!=='');
+          if(state.classList.contains('is-invalid')) valid=false;
+
+          const pinOk = /^\d{6}$/.test(pin.value.trim());
+          setValidity(pin, pinOk, 'PIN must be 6 digits.');
+          if(!pinOk) valid=false;
+
+          return valid;
+        }
+
+        function validateVehicle(){
+          let valid=true;
+          const regNo = document.getElementById('regNo');
+          const vehicleClass = document.getElementById('vehicleClass');
+          const make = document.getElementById('make');
+          const chassis = document.getElementById('chassis');
+          const engine = document.getElementById('engine');
+          const yom = document.getElementById('yom');
+          const purchaseDate = document.getElementById('purchaseDate');
+          const color = document.getElementById('color');
+
+          setValidity(regNo, regNo.value.trim().length>3);
+          if(regNo.classList.contains('is-invalid')) valid=false;
+
+          setValidity(vehicleClass, vehicleClass.value!=='');
+          if(vehicleClass.classList.contains('is-invalid')) valid=false;
+
+          // fuel radio
+          const fuels = document.querySelectorAll('input[name="fuelType"]');
+          let fuelOk=false;
+          fuels.forEach(f=>{ if(f.checked) fuelOk=true; });
+          const fuelFeedback = document.getElementById('fuelFeedback');
+          if(fuelOk){ fuelFeedback.classList.remove('text-danger'); fuelFeedback.classList.remove('d-block'); }
+          else { fuelFeedback.classList.add('text-danger'); fuelFeedback.classList.add('d-block'); valid=false; }
+
+          setValidity(make, make.value.trim().length>1);
+          if(make.classList.contains('is-invalid')) valid=false;
+
+          setValidity(chassis, chassis.value.trim().length>=6);
+          if(chassis.classList.contains('is-invalid')) valid=false;
+
+          setValidity(engine, engine.value.trim().length>=6);
+          if(engine.classList.contains('is-invalid')) valid=false;
+
+          // year <= current
+          const curYear = new Date().getFullYear();
+          const y = parseInt(yom.value,10);
+          const yOk = !isNaN(y) && y>=1900 && y<=curYear;
+          setValidity(yom, yOk, `Year must be ≤ ${curYear}.`);
+          if(!yOk) valid=false;
+
+          // purchase date not future
+          let pdOk=false;
+          if(purchaseDate.value){
+            const pd = new Date(purchaseDate.value);
+            const today = new Date(); today.setHours(0,0,0,0);
+            pdOk = pd <= today;
+          }
+          setValidity(purchaseDate, pdOk);
+          if(!pdOk) valid=false;
+
+          setValidity(color, color.value.trim().length>1);
+          if(color.classList.contains('is-invalid')) valid=false;
+
+          return valid;
+        }
+
+        function validateCompliance(){
+          let valid=true;
+          const emission = document.getElementById('emission');
+          const policyNo = document.getElementById('policyNo');
+          const insurer = document.getElementById('insurer');
+          const insExpiry = document.getElementById('insExpiry');
+          const pucExpiry = document.getElementById('pucExpiry');
+
+          setValidity(emission, emission.value!=='');
+          if(emission.classList.contains('is-invalid')) valid=false;
+
+          setValidity(policyNo, policyNo.value.trim().length>2);
+          if(policyNo.classList.contains('is-invalid')) valid=false;
+
+          setValidity(insurer, insurer.value.trim().length>2);
+          if(insurer.classList.contains('is-invalid')) valid=false;
+
+          // ins expiry >= today
+          const today = new Date(); today.setHours(0,0,0,0);
+          let ieOk=false;
+          if(insExpiry.value){ ieOk = new Date(insExpiry.value) >= today; }
+          setValidity(insExpiry, ieOk);
+          if(!ieOk) valid=false;
+
+          let pucOk=false;
+          if(pucExpiry.value){ pucOk = new Date(pucExpiry.value) >= today; }
+          setValidity(pucExpiry, pucOk);
+          if(!pucOk) valid=false;
+
+          return valid;
+        }
+
+        function validateFinance(){
+          const hyp = document.getElementById('hypothecation');
+          if(!hyp.checked) {
+            // if not hypothecated, section counts as valid
+            // Also clear any previous validation markers
+            document.getElementById('bankName').classList.remove('is-invalid');
+            document.getElementById('bankName').classList.remove('is-valid');
+            document.getElementById('agreementDate').classList.remove('is-invalid');
+            document.getElementById('agreementDate').classList.remove('is-valid');
+            return true;
+          }
+          let valid=true;
+          const bankName = document.getElementById('bankName');
+          const agreementDate = document.getElementById('agreementDate');
+
+          setValidity(bankName, bankName.value.trim().length>2);
+          if(bankName.classList.contains('is-invalid')) valid=false;
+
+          // agreement date not future
+          let adOk=false;
+          if(agreementDate.value){ adOk = new Date(agreementDate.value) <= new Date(); }
+          setValidity(agreementDate, adOk);
+          if(!adOk) valid=false;
+
+          return valid;
+        }
+
+        function validateUploads(){
+          let valid=true;
+          const idProof = document.getElementById('idProof');
+          const insCopy = document.getElementById('insCopy');
+          const vehicleImage = document.getElementById('vehicleImage');
+
+          const checkFile = (input, required=true) => {
+            const fb = input.parentElement.querySelector('.invalid-feedback');
+            if(!input.files || input.files.length===0){
+              if(required){ input.classList.remove('is-valid'); input.classList.add('is-invalid'); if(fb) fb.textContent = 'File is required.'; return false; }
+              else { input.classList.remove('is-invalid'); input.classList.remove('is-valid'); return true; }
+            }
+            const f = input.files[0];
+            const okSize = f.size <= 2*1024*1024; // 2MB
+            const okType = ['application/pdf','image/png','image/jpeg'].includes(f.type) || /\.(pdf|jpe?g|png)$/i.test(f.name);
+            if(!okSize){ if(fb) fb.textContent = 'File must be ≤ 2 MB.'; input.classList.remove('is-valid'); input.classList.add('is-invalid'); return false; }
+            if(!okType){ if(fb) fb.textContent = 'Invalid file type. PDF/JPG/PNG only.'; input.classList.remove('is-valid'); input.classList.add('is-invalid'); return false; }
+            input.classList.remove('is-invalid'); input.classList.add('is-valid'); return true;
+          };
+
+          if(!checkFile(idProof,true)) valid=false;
+          if(!checkFile(insCopy,true)) valid=false;
+          // vehicle image optional
+          if(!checkFile(vehicleImage,false)) valid=false;
+
+          return valid;
+        }
+
+        function validateDeclarations(){
+          let valid=true;
+          const terms = document.getElementById('terms');
+          const captchaAns = document.getElementById('captchaAns');
+
+          if(!terms.checked){ terms.classList.remove('is-valid'); terms.classList.add('is-invalid'); valid=false; }
+          else { terms.classList.remove('is-invalid'); terms.classList.add('is-valid'); }
+
+          const capOk = parseInt(captchaAns.value,10) === (captchaA+captchaB);
+          setValidity(captchaAns, capOk, 'Incorrect captcha answer.');
+          if(!capOk) valid=false;
+
+          return valid;
+        }
+
+        // Check each section and compute progress
+        function updateProgress(){
+          const sections = [validateOwner(), validateAddress(), validateVehicle(), validateCompliance(), validateFinance(), validateUploads(), /*declarations not counted in progress to avoid circular*/ true];
+          // For progress bar we will require sections 1-6 valid plus terms & captcha handled separately
+          const validCount = sections.filter(Boolean).length;
+          const percent = Math.round((validCount / 6) * 100);
+          topProgress.style.width = percent + '%';
+          topProgress.textContent = percent + '%';
+
+          // enable submit only when all 6 sections valid + declarations valid
+          const declOk = validateDeclarations();
+          if(validCount===6 && declOk){ submitBtn.disabled = false; }
+          else { submitBtn.disabled = true; }
+
+          return { percent, validCount, declOk };
+        }
+
+        // wire events
+        function wire(){
+          genCaptcha();
+
+          // inputs to watch
+          const watched = form.querySelectorAll('input, select, textarea');
+          watched.forEach(el=>{
+            el.addEventListener('input', ()=>{ try{ updateProgress(); }catch(e){} });
+            el.addEventListener('change', ()=>{ try{ updateProgress(); }catch(e){} });
+          });
+
+          // hypothecation toggle
+          document.getElementById('hypothecation').addEventListener('change', function(){
+            const hypoFields = document.getElementById('hypoFields');
+            if(this.checked){ hypoFields.style.display = 'flex'; hypoFields.classList.add('row');
+              document.getElementById('bankName').setAttribute('required','required');
+              document.getElementById('agreementDate').setAttribute('required','required');
+            } else { hypoFields.style.display='none';
+              document.getElementById('bankName').removeAttribute('required');
+              document.getElementById('agreementDate').removeAttribute('required');
+            }
+            updateProgress();
+          });
+
+          // intercept submit
+          form.addEventListener('submit', function(e){
+            e.preventDefault();
+            // final validation
+            const allOk = validateOwner() && validateAddress() && validateVehicle() && validateCompliance() && validateFinance() && validateUploads() && validateDeclarations();
+            if(!allOk){ updateProgress(); // reveal invalid states
+              // open first invalid accordion section
+              const firstInvalid = form.querySelector('.is-invalid');
+              if(firstInvalid){
+                const item = firstInvalid.closest('.accordion-item');
+                if(item){
+                  const collapse = new bootstrap.Collapse(item.querySelector('.accordion-collapse'), { toggle:true });
+                }
+              }
+              return;
+            }
+
+            // success: show toast
+            toast.show();
+            // optionally reset
+            // form.reset();
+            // regenerate captcha
+            genCaptcha();
+            // disable submit until user edits
+            submitBtn.disabled = true;
+            updateProgress();
+          });
+
+          // file inputs: show quick client-side filename checks
+          ['idProof','insCopy','vehicleImage'].forEach(id=>{
+            const el = document.getElementById(id);
+            el.addEventListener('change', (ev)=>{ updateProgress(); });
+          });
+
+          // initial progress
+          updateProgress();
+        }
+
+        return { wire };
+      })();
+
+      document.addEventListener('DOMContentLoaded', function(){ RTO.wire(); });
+    </script>
+  </body>
+</html>

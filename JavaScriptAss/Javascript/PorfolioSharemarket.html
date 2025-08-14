@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Share Market Portfolio Tracker</title>
+</head>
+<body>
+<h2>JavaScript Closure - Share Market Example</h2>
+<pre id="output"></pre>
+
+<script>
+function createPortfolioTracker() {
+    let portfolio = [];
+
+    function buyShare(company, quantity, price) {
+        portfolio.push({ company, quantity, price });
+        return `Bought ${quantity} shares of ${company} at ₹${price} each.`;
+    }
+
+    function sellShare(company, quantity) {
+        let stock = portfolio.find(s => s.company === company);
+        if (!stock) return `No shares found for ${company}.`;
+        if (quantity > stock.quantity) return `Not enough shares to sell for ${company}.`;
+
+        stock.quantity -= quantity;
+        return `Sold ${quantity} shares of ${company}.`;
+    }
+
+    function totalValue() {
+        let total = portfolio.reduce((sum, stock) => sum + (stock.quantity * stock.price), 0);
+        return `Portfolio Value: ₹${total}`;
+    }
+
+    return { buyShare, sellShare, totalValue };
+}
+const tracker = createPortfolioTracker();
+let output = "";
+output += tracker.buyShare("TCS", 10, 3500) + "\n";
+output += tracker.buyShare("Infosys", 5, 1500) + "\n";
+output += tracker.sellShare("TCS", 3) + "\n";
+output += tracker.totalValue();
+
+document.getElementById("output").textContent = output;
+</script>
+</body>
+</html>
+
+
+<!-- 
+
+JavaScript Closure - Share Market Example
+Bought 10 shares of TCS at ₹3500 each.
+Bought 5 shares of Infosys at ₹1500 each.
+Sold 3 shares of TCS.
+Portfolio Value: ₹32000
+ -->
